@@ -8,6 +8,8 @@ import { Assistant } from "./entity/assistant.entity";
 import { Thread } from "./entity/thread.entity";
 import { Message } from "./entity/message.entity";
 import { AssistantModule } from './assistant/assistant.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
@@ -30,6 +32,8 @@ import { AssistantModule } from './assistant/assistant.module';
 		}),
 		OpenaiModule,
 		AssistantModule,
+		AuthModule,
+		UsersModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
