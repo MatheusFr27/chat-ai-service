@@ -1,5 +1,5 @@
 import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
-import { OpenaiService } from 'src/openai/openai.service';
+import { OpenaiService } from 'src/modules/openai/openai.service';
 import { AssistantService } from './assistant.service';
 
 @Controller('assistant')

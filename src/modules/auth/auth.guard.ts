@@ -10,7 +10,7 @@ import type { Request } from "express";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 
-export const IS_PUBLIC_KEY = 'isPublic';
+export const IS_PUBLIC_KEY = "isPublic";
 export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 	constructor(
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService,
-		private readonly reflector: Reflector
+		private readonly reflector: Reflector,
 	) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -28,11 +28,11 @@ export class AuthGuard implements CanActivate {
 		const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
 			context.getHandler(),
 			context.getClass(),
-		  ]);
-		  if (isPublic) {
-			// 💡 See this condition
+		]);
+
+		if (isPublic) {
 			return true;
-		  }
+		}
 
 		if (!token) {
 			throw new UnauthorizedException();

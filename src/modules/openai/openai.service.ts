@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { UUID } from "node:crypto";
 import OpenAI from "openai";
 
 @Injectable()
@@ -25,6 +26,18 @@ export class OpenaiService {
 		});
 
 		return assistant;
+	}
+
+	async createThread(): Promise<OpenAI.Beta.Threads.Thread> {
+		return await this.client.beta.threads.create();
+	}
+
+	async getThread(id: UUID): Promise<OpenAI.Beta.Threads.Thread> {
+		return await this.client.beta.threads.retrieve(id);
+	}
+
+	async getAssistant(id: UUID): Promise<OpenAI.Beta.Assistants.Assistant> {
+		return await this.client.beta.assistants.retrieve(id);
 	}
 
 	async generateResponse(

@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import type { UUID } from 'node:crypto';
-import { Assistant } from 'src/entity/assistant.entity';
+import { Assistant } from 'src/shared/entity/assistant.entity';
 import { DataSource, type QueryRunner, Repository } from 'typeorm';
 
 @Injectable()

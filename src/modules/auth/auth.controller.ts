@@ -13,6 +13,13 @@ export class AuthController {
       return this.authService.signIn(body.email, body.password);
     }
 
+    @Public()
+    @HttpCode(HttpStatus.OK)
+    @Post('register')
+    register(@Body() body: { username: string, email: string, password: string }) {
+      return this.authService.register(body.username, body.email, body.password);
+    }
+
     @UseGuards(AuthGuard)
     @Get('profile')
     getProfile(@Request() request) {

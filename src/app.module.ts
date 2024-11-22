@@ -2,14 +2,15 @@ import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { OpenaiModule } from "./openai/openai.module";
+import { OpenaiModule } from "./modules/openai/openai.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Assistant } from "./entity/assistant.entity";
-import { Thread } from "./entity/thread.entity";
-import { Message } from "./entity/message.entity";
-import { AssistantModule } from './assistant/assistant.module';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { Assistant } from "./shared/entity/assistant.entity";
+import { Thread } from "./shared/entity/thread.entity";
+import { Message } from "./shared/entity/message.entity";
+import { AssistantModule } from './modules/assistant/assistant.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { User } from "./shared/entity/users.entity";
 
 @Module({
 	imports: [
@@ -25,7 +26,7 @@ import { UsersModule } from './users/users.module';
 				username: configService.get("DATABASE_USER"),
 				password: configService.get("DATABASE_PASSWORD"),
 				database: configService.get("DATABASE_DB"),
-				entities: [Assistant, Thread, Message],
+				entities: [User, Assistant, Thread, Message],
 				synchronize: configService.get("DEPLOYMENT") === "development",
 			}),
 			inject: [ConfigService],
